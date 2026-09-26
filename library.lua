@@ -939,6 +939,7 @@ function Library:CreatePage(pageName, icon)
     Page.Button = PageBtn
     Page.Label = PageLabel
     Page.Icon = IconImg
+    Page.Container = PageFrame
     table.insert(self.Pages, Page)
 
     -- ====================================================
@@ -1031,6 +1032,7 @@ function Library:CreatePage(pageName, icon)
             }, CardFrame)
 
             local Container = New("Frame", {
+                Name = "Container",
                 Size = UDim2.new(1, -24, 0, 0),
                 AutomaticSize = Enum.AutomaticSize.Y,
                 Position = UDim2.new(0, 12, 0, 35),
@@ -1043,6 +1045,8 @@ function Library:CreatePage(pageName, icon)
             }, Container)
 
             New("UIPadding", {PaddingBottom = UDim.new(0, 12)}, Container)
+            Card.Container = Container
+            Card.Frame = CardFrame
 
             function Card:AddToggle(text, default, callback)
                 callback = callback or function() end
