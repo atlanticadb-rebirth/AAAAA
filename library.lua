@@ -26,16 +26,16 @@ local Camera = workspace.CurrentCamera
 local ThemeManager = {
     Objects = {},
     CurrentTheme = {
-        Background = Color3.fromRGB(12, 12, 14),
-        Container = Color3.fromRGB(16, 16, 18),
-        Card = Color3.fromRGB(18, 18, 20),
-        Element = Color3.fromRGB(24, 24, 28),
-        ElementHover = Color3.fromRGB(35, 35, 40),
-        Accent = Color3.fromRGB(0, 170, 255),
-        Text = Color3.fromRGB(240, 240, 240),
+        Background = Color3.fromRGB(15, 15, 17),
+        Container = Color3.fromRGB(15, 15, 17),
+        Card = Color3.fromRGB(22, 22, 25),
+        Element = Color3.fromRGB(30, 30, 35),
+        ElementHover = Color3.fromRGB(40, 40, 45),
+        Accent = Color3.fromRGB(140, 120, 200),
+        Text = Color3.fromRGB(245, 245, 245),
         SubText = Color3.fromRGB(180, 180, 190),
-        Muted = Color3.fromRGB(150, 150, 160),
-        Stroke = Color3.fromRGB(40, 40, 45)
+        Muted = Color3.fromRGB(130, 130, 140),
+        Stroke = Color3.fromRGB(45, 45, 50)
     }
 }
 function ThemeManager:Bind(instance, property, colorType)
@@ -294,8 +294,8 @@ function Library.new(options, gameSubTitle)
     -- Main Window
     local MainFrame = New("Frame", {
         Name = "MainFrame",
-        Size = UDim2.new(0, 620, 0, 440),
-        Position = UDim2.new(0.5, -310, 0.5, -220),
+        Size = UDim2.new(0, 800, 0, 560),
+        Position = UDim2.new(0.5, -400, 0.5, -280),
         BackgroundColor3 = "Theme:Background",
         BorderSizePixel = 0,
         ClipsDescendants = false,
@@ -406,14 +406,15 @@ function Library.new(options, gameSubTitle)
     -- SIDEBAR (LEFT)
     local Sidebar = New("Frame", {
         Name = "Sidebar",
-        Size = UDim2.new(0, 200, 1, -20),
+        Size = UDim2.new(0, 85, 1, -20),
         Position = UDim2.new(0, 10, 0, 10),
         BackgroundTransparency = 1,
     }, MainFrame)
 
     -- Header Card
     local HeaderCard = New("Frame", {
-        Size = UDim2.new(1, 0, 0, 65),
+        Size = UDim2.new(1, 0, 0, 75),
+        BackgroundTransparency = 1,
         BackgroundColor3 = "Theme:Card",
         BorderSizePixel = 0,
     }, Sidebar)
@@ -422,40 +423,19 @@ function Library.new(options, gameSubTitle)
     MakeDraggable(MainFrame, HeaderCard)
 
     local LogoBox = New("Frame", {
-        Size = UDim2.new(0, 42, 0, 42),
-        Position = UDim2.new(0, 12, 0.5, -21),
-        BackgroundColor3 = "Theme:Element",
+        Size = UDim2.new(1, 0, 1, 0),
+        BackgroundTransparency = 1,
     }, HeaderCard)
-    New("UICorner", {CornerRadius = UDim.new(0, 8)}, LogoBox)
-
     New("ImageLabel", {
         Image = "rbxassetid://127242944781300",
-        Size = UDim2.new(1, -8, 1, -8),
-        Position = UDim2.new(0, 4, 0, 4),
+        Size = UDim2.new(0, 48, 0, 48),
+        Position = UDim2.new(0.5, -24, 0.5, -24),
         BackgroundTransparency = 1,
     }, LogoBox)
 
-    New("TextLabel", {
-        Text = hubName or "Balright",
-        Size = UDim2.new(1, -65, 0, 20),
-        Position = UDim2.new(0, 62, 0, 14),
-        TextColor3 = "Theme:Text",
-        Font = Enum.Font.BuilderSansBold,
-        TextSize = 14,
-        TextXAlignment = Enum.TextXAlignment.Left,
-        BackgroundTransparency = 1,
-    }, HeaderCard)
+    
 
-    New("TextLabel", {
-        Text = gameSubTitle or "for Game",
-        Size = UDim2.new(1, -65, 0, 18),
-        Position = UDim2.new(0, 62, 0, 32),
-        TextColor3 = "Theme:SubText",
-        Font = Enum.Font.BuilderSans,
-        TextSize = 11,
-        TextXAlignment = Enum.TextXAlignment.Left,
-        BackgroundTransparency = 1,
-    }, HeaderCard)
+    
 
     -- Nav Scroll Container
     local NavContainer = New("ScrollingFrame", {
@@ -470,26 +450,47 @@ function Library.new(options, gameSubTitle)
     }, Sidebar)
 
     New("UIListLayout", {
-        Padding = UDim.new(0, 4),
+        Padding = UDim.new(0, 8),
         SortOrder = Enum.SortOrder.LayoutOrder,
+        HorizontalAlignment = Enum.HorizontalAlignment.Center,
     }, NavContainer)
 
     -- Footer Card
     local FooterCard = New("Frame", {
-        Size = UDim2.new(1, 0, 0, 60),
-        Position = UDim2.new(0, 0, 1, -60),
-        BackgroundColor3 = "Theme:Card",
-        BorderSizePixel = 0,
+        Size = UDim2.new(1, 0, 0, 85),
+        Position = UDim2.new(0, 0, 1, -85),
+        BackgroundTransparency = 1,
     }, Sidebar)
-    New("UICorner", {CornerRadius = UDim.new(0, 8)}, FooterCard)
 
     local LocalPlayer = game.Players.LocalPlayer
     local AvatarImg = New("ImageLabel", {
         Size = UDim2.new(0, 42, 0, 42),
-        Position = UDim2.new(0, 9, 0.5, -21),
+        Position = UDim2.new(0.5, -21, 0, 5),
         BackgroundColor3 = "Theme:Element",
     }, FooterCard)
     New("UICorner", {CornerRadius = UDim.new(1, 0)}, AvatarImg)
+    
+    New("TextLabel", {
+        Text = LocalPlayer and LocalPlayer.Name or "Player",
+        Size = UDim2.new(1, 0, 0, 14),
+        Position = UDim2.new(0, 0, 0, 52),
+        TextColor3 = "Theme:Text",
+        Font = Enum.Font.BuilderSansBold,
+        TextSize = 11,
+        TextXAlignment = Enum.TextXAlignment.Center,
+        BackgroundTransparency = 1,
+    }, FooterCard)
+    
+    New("TextLabel", {
+        Text = gameSubTitle,
+        Size = UDim2.new(1, 0, 0, 14),
+        Position = UDim2.new(0, 0, 0, 66),
+        TextColor3 = "Theme:SubText",
+        Font = Enum.Font.BuilderSans,
+        TextSize = 10,
+        TextXAlignment = Enum.TextXAlignment.Center,
+        BackgroundTransparency = 1,
+    }, FooterCard)
 
     task.spawn(function()
         if LocalPlayer then
@@ -624,7 +625,7 @@ function Library.new(options, gameSubTitle)
             Name = "KeyFrame",
             Size = UDim2.new(0, 400, 0, 250),
             Position = UDim2.new(0.5, -200, 0.5, -125),
-            BackgroundColor3 = "Theme:Container",
+            BackgroundTransparency = 1,
             BorderSizePixel = 0,
             ZIndex = 200,
         }, ScreenGui)
